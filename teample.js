@@ -1,3 +1,6 @@
+let showIntro = true;
+let startButton;
+
 let x;
 let y;
 let scene1;
@@ -108,6 +111,15 @@ let axeX, axeY;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  startButton = createButton("START");
+startButton.position(windowWidth / 2 - 40, windowHeight / 2 + 40);
+startButton.size(80, 40);
+startButton.style("font-size", "18px");
+startButton.mousePressed(() => {
+  showIntro = false;
+  startButton.hide(); // 버튼 숨기기
+});
+
   scene1 = false;
   scene2 = false;
   scene3 = false;
@@ -183,6 +195,18 @@ function setup() {
 
 function draw() {
   background(220);
+
+  if (showIntro) {
+    background(0);
+    textAlign(CENTER, CENTER);
+    fill(255);
+    textSize(28);
+    text("환경파괴는 결국 인간에게 돌아옵니다", width / 2, height / 2 - 40);
+    textSize(20);
+    text("유승호, 손현성, 지재상", width / 2, height / 2);
+    return; // 이후 코드 실행하지 않음
+  }
+  
   console.log(scene1);
   if (Scene === 1) {
 
@@ -356,12 +380,12 @@ function draw() {
 
     // 연기 업데이트 및 그리기
     updateSmoke();
-    updateCarSmoke()
+    updateCarSmoke();
     drawStickmanInCar(x, y);
   }
   else if (scene3 == true) {
     drawBackground3();
-    drawStickMan(x, y)
+    drawStickMan(x, y);
   }
   
   
